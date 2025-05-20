@@ -1,5 +1,5 @@
-import * as NoteModel from '../models/noteModel.js';
-import { Request, Response } from 'express';
+import * as NoteModel from "../models/noteModel.js";
+import { Request, Response } from "express";
 
 export const getNotes = async (req: Request, res: Response) => {
   const notes = await NoteModel.getAll();
@@ -7,7 +7,9 @@ export const getNotes = async (req: Request, res: Response) => {
 };
 
 export const createNote = async (req: Request, res: Response) => {
-   const { title } = req.body;
+  console.log('ddds');
+  const { title } = req.body;
+  console.log("req.body:", req.body);
   const note = await NoteModel.create(title);
   res.json(note);
-}
+};

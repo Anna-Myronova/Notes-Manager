@@ -1,4 +1,5 @@
 import { Pool } from "pg";
+import app from "./main";
 import "dotenv/config";
 
 export const pool = new Pool({
@@ -8,16 +9,5 @@ export const pool = new Pool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
-
-async function checkConnection() {
-  try {
-    const res = await pool.query("SELECT NOW()");
-      console.log("Підключено до PostgreSQL. Час сервера:", res.rows[0].now);
-    } catch (err) {
-    console.error("Помилка підключення до БД:", err);
-  }
-}
-
-checkConnection();
 
 export default pool;
