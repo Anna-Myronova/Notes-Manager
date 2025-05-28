@@ -1,5 +1,5 @@
 import db from "../../db.js";
-import { Note } from "../../typeNote.js";
+import { Note } from "../../types/typeNote.js";
 
 export const getAll = async (): Promise<Note[]> => {
   const result = await db.query("SELECT * FROM notes ORDER BY created_at DESC");
