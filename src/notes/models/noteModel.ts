@@ -1,15 +1,16 @@
 import db from "../../db.js";
 import { Note } from "../../types/typeNote.js";
 
-export const getAll = async (): Promise<Note[]> => {
-  const result = await db.query("SELECT * FROM notes ORDER BY created_at DESC");
+export const getAll = async (userId: number): Promise<Note[]> => {
+  // const result = await db.query("SELECT * FROM notes ORDER BY created_at DESC");
+  const result = await db.query("SELECT * FROM notes WHERE user_id = $1", [userId]);
   return result.rows;
 };
 
-export const create = async (title: string): Promise<Note> => {
+export const create = async (title: string, userId: number): Promise<Note> => {
   const result = await db.query(
-    "INSERT INTO notes (title) VALUES ($1) RETURNING *",
-    [title]
+    "INSERT INTO notes (title, user_id) VALUES ($1, $2) RETURNING *",
+    [title, userId]
   );
   return result.rows[0];
 };

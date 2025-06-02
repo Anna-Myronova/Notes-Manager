@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import * as UserModel from "../models/userModel";
+import { JWTPayload } from "../../types/typeJWTPayload";
 
 async function hashPassword(password: string) {
   return await bcrypt.hash(password, 10);
@@ -21,7 +22,7 @@ export const register = async (req: Request, res: Response) => {
   const hashedPassword = await hashPassword(password);
   const newUser: User = await UserModel.createUser(email, hashedPassword);
   const token = jwt.sign(
-    { id: newUser.id, email: newUser.email },
+    { id: newUser.id, email: newUser.email } as JWTPayload,
     process.env.JWT_SECRET!
   );
 
@@ -44,7 +45,7 @@ export const login = async (req: Request, res: Response) => {
   }
 
   const token = jwt.sign(
-    { id: existingUser.id, email: existingUser.email },
+    { id: existingUser.id, email: existingUser.email } as JWTPayload,
     process.env.JWT_SECRET!
   );
 
