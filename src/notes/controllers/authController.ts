@@ -46,7 +46,7 @@ export const login = async (req: Request, res: Response) => {
 
   const token = jwt.sign(
     { id: existingUser.id, email: existingUser.email } as JWTPayload,
-    process.env.JWT_SECRET!
+    process.env.JWT_SECRET!, { expiresIn: "15m" }
   );
 
   res.status(200).json({ token });

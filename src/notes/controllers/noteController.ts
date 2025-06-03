@@ -21,7 +21,7 @@ export const deleteNoteById = async (req: Request, res: Response) => {
     return;
   }
 
-  const deletedNote = await NoteModel.deleteNote(id);
+  const deletedNote = await NoteModel.deleteNote(id, req.user?.id!);
 
   if (!deletedNote) {
     res.status(404).json({ error: "Note is not found" });
@@ -39,7 +39,7 @@ export const editNote = async (req: Request, res: Response) => {
     return;
   }
 
-  const editedNote = await NoteModel.edit(id, title);
+  const editedNote = await NoteModel.edit(id, title, req.user?.id!);
 
   if (!editedNote) {
     res.status(404).json({ error: "Note is not found" });
@@ -56,7 +56,7 @@ export const getNoteById = async (req: Request, res: Response) => {
     return;
   }
 
-  const note = await NoteModel.getNoteById(id);
+  const note = await NoteModel.getNoteById(id, req.user?.id!);
 
   if (!note) {
     res.status(404).json({ error: "Note is not found" });
