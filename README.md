@@ -31,4 +31,6 @@ After logging in, the user receives a JWT token. This token must be included in 
 Authorization: Bearer <your_token>
 
 **Getting Started**  
-node dist/main.js
+npm i
+tsc  
+nodemon dist/main.js
