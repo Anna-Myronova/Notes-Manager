@@ -1,5 +1,5 @@
-import db from "../../db.js";
-import { Note } from "../../types/typeNote.js";
+import db from "../../db";
+import { Note } from "../../types/typeNote";
 
 export const getAll = async (userId: number): Promise<Note[]> => {
   const result = await db.query("SELECT * FROM notes WHERE user_id = $1", [userId]);
