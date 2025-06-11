@@ -1,6 +1,6 @@
 import { json } from "stream/consumers";
-import db from "../../db.js";
-import { User } from './../../types/typeUser.js'
+import db from "../../db";
+import { User } from "./../../types/typeUser";
 
 export const createUser = async (email: string, hashedPassword: string): Promise<User> => {
   const result = await db.query(
