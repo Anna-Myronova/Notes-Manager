@@ -1,5 +1,5 @@
 import { error, log } from "console";
-import * as NoteModel from "../models/noteModel.js";
+import * as NoteModel from "../models/noteModel";
 import { Request, Response } from "express";
 
 export const getNotes = async (req: Request, res: Response) => {
