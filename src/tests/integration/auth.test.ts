@@ -1,8 +1,10 @@
 import request from "supertest";
 import app from "../../app";
-import { pool } from "../../dbTest";
+import { pool } from "../../db";
 
 beforeEach(async () => {
+  const { rows } = await pool.query("SELECT current_database()");
+  console.log("🔍 Currently connected to DB:", rows[0].current_database);
   await pool.query("DELETE FROM users");
 });
 
@@ -18,6 +20,8 @@ describe("POST /api/register", () => {
       email: "test@example.com",
       password: "testpassword",
     });
+    
+  console.log(response.body);
 
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("newUser");

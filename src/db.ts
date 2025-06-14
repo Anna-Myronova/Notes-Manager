@@ -1,6 +1,8 @@
 import { Pool } from "pg";
-import app from "./main";
-import "dotenv/config";
+import dotenv from "dotenv";
+
+const envFile = process.env.NODE_ENV === "test" ? ".env.test" : ".env";
+dotenv.config({ path: envFile });
 
 export const pool = new Pool({
   host: process.env.DB_HOST,
