@@ -10,7 +10,7 @@ export const getNotes = async (req: Request, res: Response) => {
 export const createNote = async (req: Request, res: Response) => {
   const { title } = req.body;
   const note = await NoteModel.create(title, req.user?.id!);
-  res.json(note);
+  res.status(201).json(note);
 };
 
 export const deleteNoteById = async (req: Request, res: Response) => {

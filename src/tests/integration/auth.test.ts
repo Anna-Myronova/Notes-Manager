@@ -3,9 +3,9 @@ import app from "../../app";
 import { pool } from "../../db";
 
 beforeEach(async () => {
-  const { rows } = await pool.query("SELECT current_database()");
-  console.log("🔍 Currently connected to DB:", rows[0].current_database);
-  await pool.query("DELETE FROM users");
+  const { rows } = await pool.query('SELECT current_database()');
+  console.log("Currently connected to DB:", rows[0].current_database);
+  await pool.query('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
 });
 
 afterAll(async () => {
